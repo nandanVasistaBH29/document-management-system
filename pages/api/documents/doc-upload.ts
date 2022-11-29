@@ -20,7 +20,7 @@ const readFile = (
   if (saveLocally) {
     options.uploadDir = path.join(
       process.cwd(),
-      `/storage/${organizationName}/${email}/`
+      `/public/storage/${organizationName}/${email}/`
     );
     options.filename = (name, ext, path, form) => {
       return Date.now().toString() + "_" + path.originalFilename;
@@ -42,25 +42,41 @@ const handler: NextApiHandler = async (req, res) => {
   console.log(organizationName, email);
   try {
     await fs.readdir(
-      path.join(process.cwd() + "/storage", `/${organizationName}/${email}`)
+      path.join(
+        process.cwd() + "/public/storage",
+        `/${organizationName}/${email}`
+      )
     ); // if dir is there
   } catch (error) {
     try {
       await fs.mkdir(
-        path.join(process.cwd() + "/storage", `/${organizationName}/${email}`)
+        path.join(
+          process.cwd() + "/public/storage",
+          `/${organizationName}/${email}`
+        )
       ); // if user dir is there then org will there too
     } catch (error) {
       try {
         await fs.mkdir(
-          path.join(process.cwd() + "/storage", `/${organizationName}`)
+          path.join(process.cwd() + "/public/storage", `/${organizationName}`)
         ); // if org dir is not there then create it first
+
+        await fs.mkdir(
+          path.join(
+            process.cwd() + "/public/storage",
+            `/${organizationName}/${email}`
+          )
+        );
       } catch (error) {
-        await fs.mkdir(path.join(process.cwd(), "/storage"));
+        await fs.mkdir(path.join(process.cwd(), "/public/storage"));
         await fs.mkdir(
-          path.join(process.cwd() + "/storage", `/${organizationName}`)
+          path.join(process.cwd() + "/public/storage", `/${organizationName}`)
         ); // if org dir is not there then create it first
         await fs.mkdir(
-          path.join(process.cwd() + "/storage", `/${organizationName}/${email}`)
+          path.join(
+            process.cwd() + "/public/storage",
+            `/${organizationName}/${email}`
+          )
         ); // then create user dir
       }
     }

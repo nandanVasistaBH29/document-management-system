@@ -16,19 +16,12 @@ const handler: NextApiHandler = async (req, res) => {
 
   try {
     const dir = await fs.readdir(
-      path.join(process.cwd() + "/storage", `/${organizationName}/${email}`)
+      path.join(
+        process.cwd() + "/public/storage",
+        `/${organizationName}/${email}`
+      )
     ); // if dir is there
-    const files = [];
-    dir.forEach((item) => {
-      try {
-        const path =
-          process.cwd() + "/storage" + `/${organizationName}/${email}/` + item;
-        files.push(path);
-      } catch (err) {
-        console.log(err);
-      }
-    });
-    return res.status(200).json(files);
+    return res.status(200).json(dir);
   } catch (error) {
     console.log(error);
     res.status(200).json({ err: "no files uploaded" });

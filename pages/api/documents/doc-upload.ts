@@ -3,6 +3,7 @@ import { NextApiHandler, NextApiRequest } from "next";
 import formidable from "formidable"; //a package which makes uploading files inside next.js a cake walk
 import path from "path";
 import fs from "fs/promises";
+import { encryptFile } from "../../../utils/encrptFile";
 //disabling the default bodyparser
 export const config = {
   api: {
@@ -15,7 +16,8 @@ const readFile = (
   saveLocally?: boolean
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
   const { organizationName, email } = req.query;
-
+  let filePath =
+    process.cwd() + `/public/storage/${organizationName}/${email}/`;
   const options: formidable.Options = {};
   if (saveLocally) {
     options.uploadDir = path.join(
@@ -23,7 +25,9 @@ const readFile = (
       `/public/storage/${organizationName}/${email}/`
     );
     options.filename = (name, ext, path, form) => {
-      return Date.now().toString() + "_" + path.originalFilename;
+      const filename = Date.now().toString() + "_" + path.originalFilename;
+      filePath += filename;
+      return filename;
     };
   }
   options.maxFileSize = 16000 * 1024 * 1024;
@@ -32,6 +36,8 @@ const readFile = (
     form.parse(req, (err, fields, files) => {
       if (err) reject(err);
       resolve({ fields, files });
+      console.log(filePath);
+      encryptFile(filePath); // call for encryption
     });
   });
 };

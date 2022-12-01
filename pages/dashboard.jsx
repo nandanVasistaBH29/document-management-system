@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import fs from "fs/promises";
 import path from "path";
-import { fileURLToPath } from "url";
-
 import axios from "axios";
 const dashboard = ({ dirs }) => {
   const [creds, setCreds] = useState({
@@ -150,12 +148,10 @@ const dashboard = ({ dirs }) => {
 export default dashboard;
 export const getServerSideProps = async () => {
   const props = { dirs: [] };
-  const relativePath = (a) =>
-    path.join(path.dirname(fileURLToPath(import.meta.url)), a);
-
   try {
-    const dirs = await fs.readdir(relativePath("../public/logo/"));
-    console.log(__dirname);
+    const dirs = await fs.readdir(
+      path.join(process.cwd(), "/current/public/logo")
+    );
     props.dirs = dirs;
     return { props };
   } catch (error) {

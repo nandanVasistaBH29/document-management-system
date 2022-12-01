@@ -47,11 +47,15 @@ const dashboard = ({ dirs }) => {
         <div>
           <div className="flex items-center justify-around">
             <div>
-              <img
-                className="h-40 rounded-full"
-                src={logoURL}
-                alt="company logo"
-              />
+              {logoURL && (
+                <div>
+                  <img
+                    className="h-40 rounded-full"
+                    src={logoURL}
+                    alt="company logo"
+                  />
+                </div>
+              )}
             </div>
             <div>
               <h2 className="text-xl">
@@ -149,9 +153,7 @@ export default dashboard;
 export const getServerSideProps = async () => {
   const props = { dirs: [] };
   try {
-    const dirs = await fs.readdir(
-      path.join(process.cwd(), "/current/public/logo")
-    );
+    const dirs = await fs.readdir(path.join(process.cwd(), "/public/logo"));
     props.dirs = dirs;
     return { props };
   } catch (error) {

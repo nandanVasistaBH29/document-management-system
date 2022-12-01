@@ -9,7 +9,7 @@ module.exports = {
     production: {
       key: "serverkey.pem", //key of linux server
       user: "ubuntu",
-      host: "13.232.61.253", //public IP
+      host: "43.205.203.149", //public IP
       ref: "origin/main", //in git origin/main
       repo: "git@github.com:nandanVasistaBH29/document-management-system.git",
       path: "/home/ubuntu",

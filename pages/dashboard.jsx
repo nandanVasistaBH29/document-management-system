@@ -28,8 +28,7 @@ const dashboard = ({ dirs, check }) => {
     const data = JSON.parse(localStorage.getItem("org-doc-user-creds"));
     setCreds(data);
     setLogoURL(
-      "http://13.127.184.210/logo/" +
-        dirs.filter((dir) => dir.includes(data.organizationName))
+      "/logo/" + dirs.filter((dir) => dir.includes(data.organizationName))
     );
   }, []);
   const createUser = async (e) => {

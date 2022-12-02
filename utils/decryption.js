@@ -7,7 +7,7 @@ KEY = crypto
   .update(String(KEY))
   .digest("base64")
   .substring(0, 32);
-export const decrypt = (encrypted) => {
+export const decrypt = async (encrypted) => {
   // get the iv : the first 16 bytes
   const iv = encrypted.slice(0, 16);
   //get the rest of encrypted data

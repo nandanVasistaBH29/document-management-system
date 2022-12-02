@@ -40,18 +40,7 @@ const Decrypted = () => {
               return (
                 <>
                   <h4>{file}</h4>
-                  <a
-                    role="button"
-                    href={
-                      "/storage/" +
-                      user.organizationName +
-                      "/" +
-                      user.email +
-                      "/" +
-                      file
-                    }
-                    download="proposed_file_name.pdf"
-                  >
+                  <a href={file} download="download.pdf">
                     Download
                   </a>
                 </>

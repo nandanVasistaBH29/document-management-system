@@ -13,24 +13,20 @@ export const config = {
 const handler: NextApiHandler = async (req, res) => {
   //check if dir exists or not
   const { organizationName, email, encrypted } = req.query;
+  const PATH =
+    process.cwd() + "/public/storage" + `/${organizationName}/${email}/`;
   try {
-    const dir = await fs.readdir(
-      path.join(
-        process.cwd() + "/public/storage",
-        `/${organizationName}/${email}`
-      )
-    ); // if dir is there
+    const dir = await fs.readdir(PATH); // if dir is there
     const files = [];
     dir.forEach((file) => {
-      console.log("====================================");
       console.log(file.includes("decrypted") && encrypted === "true");
-      console.log("====================================");
       if (encrypted === "true" && !file.includes("decrypted")) {
         files.push(file);
       } else if (encrypted === "false" && file.includes("decrypted")) {
         files.push(file);
       }
     });
+
     return res.status(200).json(files);
   } catch (error) {
     console.log(error);

@@ -1,6 +1,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+// getting data from the URL
 const getQueryParams = (query) => {
   return query
     ? (/^[?#]/.test(query) ? query.slice(1) : query)
@@ -18,7 +19,6 @@ const getQueryParams = (query) => {
 const User = () => {
   const [user, setUser] = useState({});
   const [files, setFiles] = useState([]);
-  const [decryptpath, setDecryptPath] = useState("");
   useEffect(() => {
     getAllDetails();
   }, []);
@@ -41,6 +41,9 @@ const User = () => {
     setUser(art);
   };
   const handleDecypt = async (path) => {
+    path = user.organizationName + "/" + user.email + "/" + path;
+    console.log(path);
+
     const res = await axios.post(`/api/documents/decryption`, { path });
     console.log(res);
   };
@@ -55,41 +58,15 @@ const User = () => {
       {files !== [] ? (
         <>
           {files.map((file) => {
-            console.log("====================================");
-            console.log(
-              "/storage/" +
-                user.organizationName +
-                "/" +
-                user.email +
-                "/" +
-                file
-            );
-            console.log("====================================");
             return (
               <>
                 <h4>{file}</h4>
                 <Link
                   href={"/users/decrypted"}
-                  onClick={() =>
-                    handleDecypt(
-                      "/storage/" +
-                        user.organizationName +
-                        "/" +
-                        user.email +
-                        "/" +
-                        file
-                    )
-                  }
+                  onClick={() => handleDecypt(file)}
                 >
                   Decrypt The File First
                 </Link>
-                <a
-                  role="button"
-                  href={decryptpath}
-                  download="proposed_file_name.pdf"
-                >
-                  Download
-                </a>
               </>
             );
           })}

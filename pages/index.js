@@ -40,7 +40,7 @@ export default function Home({ dirs, check }) {
         <div className="flex h-40 w-screen overflow-x-scroll">
           {dirs.map((item, index) => (
             <img
-              src={`/logo/${item}`}
+              src={`/public/logo/${item}`}
               className="text-blue-500 h-full m-4 p-4 rounded-3xl overflow-x-auto"
             />
           ))}

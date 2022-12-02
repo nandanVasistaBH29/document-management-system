@@ -3,7 +3,9 @@ import Link from "next/link";
 import fs from "fs/promises";
 import path from "path";
 import axios from "axios";
-const dashboard = ({ dirs }) => {
+import process from "process";
+const dashboard = ({ dirs, check }) => {
+  // check is nothing but abs path to the dir where next.js runs
   const [creds, setCreds] = useState({
     isAdmin: "",
     oid: "",
@@ -153,8 +155,10 @@ export default dashboard;
 export const getServerSideProps = async () => {
   const props = { dirs: [] };
   try {
+    const check = process.cwd();
     const dirs = await fs.readdir(path.join(process.cwd(), "/public/logo"));
     props.dirs = dirs;
+    props.check = check;
     return { props };
   } catch (error) {
     return { props };

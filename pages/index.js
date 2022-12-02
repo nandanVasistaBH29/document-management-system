@@ -6,9 +6,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 export default function Home({ dirs, check }) {
   useEffect(() => {
-    console.log("====================================");
-    console.log(check);
-    console.log("====================================");
+    console.log(check); // for testing path
   }, []);
   return (
     <div>
@@ -41,12 +39,10 @@ export default function Home({ dirs, check }) {
 
         <div className="flex h-40 w-screen overflow-x-scroll">
           {dirs.map((item, index) => (
-            <Link href={`/logo/${item}`}>
-              <img
-                src={`/logo/${item}`}
-                className="text-blue-500 h-full m-4 p-4 rounded-3xl overflow-x-auto"
-              />
-            </Link>
+            <img
+              src={`/logo/${item}`}
+              className="text-blue-500 h-full m-4 p-4 rounded-3xl overflow-x-auto"
+            />
           ))}
         </div>
       </main>

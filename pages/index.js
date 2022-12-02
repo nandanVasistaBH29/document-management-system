@@ -3,8 +3,13 @@ import Card from "../components/Card";
 import fs from "fs/promises";
 import path from "path";
 import Link from "next/link";
-
-export default function Home({ dirs }) {
+import { useEffect } from "react";
+export default function Home({ dirs, check }) {
+  useEffect(() => {
+    console.log("====================================");
+    console.log(check);
+    console.log("====================================");
+  }, []);
   return (
     <div>
       <Head>
@@ -52,8 +57,10 @@ export default function Home({ dirs }) {
 export const getServerSideProps = async () => {
   const props = { dirs: [] };
   try {
+    const check = process.cwd();
     const dirs = await fs.readdir(path.join(process.cwd(), "/public/logo"));
     props.dirs = dirs;
+    props.check = check;
     return { props };
   } catch (error) {
     return { props };

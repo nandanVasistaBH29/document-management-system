@@ -1,3 +1,8 @@
+/*
+/api/documents/decryption OPTIONAL
+ip: path to encrypted file logic for the decryption in /utils/decryption
+
+*/
 import fs from "fs";
 import { decrypt } from "../../../utils/decryption";
 export default async function (req, res) {

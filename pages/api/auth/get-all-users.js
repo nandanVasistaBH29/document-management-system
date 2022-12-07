@@ -1,3 +1,15 @@
+/*
+   /api/auth/get-all-users.js
+   desc: getting all the users belong to a particular organization with a particular oid
+   req: dbconnection
+   method:GET
+   ip:oid
+   op: success: status(200).json(data); // an array of all users
+   cause of failure:
+   1.DB pool not able to provide a connection
+   2.ORG not found Violation of foreign key constraint
+   */
+
 import { pool } from "../../../utils/connectDb";
 export default function handler(req, res) {
   const oid = req.query.oid;

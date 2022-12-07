@@ -4,6 +4,7 @@ import path from "path";
 import axios from "axios";
 const AddDoc = ({ dirs }) => {
   const [selectedFile, setSelectedFile] = useState();
+  const [uploadedSuccessfully, setUploadedSuccessfully] = useState(false);
   const [creds, setCreds] = useState({
     isAdmin: "",
     oid: "",
@@ -21,8 +22,12 @@ const AddDoc = ({ dirs }) => {
   }, []);
   const handleUpload = async (e) => {
     e.preventDefault();
+    setUploadedSuccessfully(false);
     console.log(selectedFile);
     try {
+      console.log("====================================");
+      console.log(selectedFile);
+      console.log("====================================");
       if (
         !selectedFile ||
         creds.organizationName === "" ||
@@ -36,6 +41,7 @@ const AddDoc = ({ dirs }) => {
         `/api/documents/doc-upload?organizationName=${creds.organizationName}&email=${creds.email}`,
         formData
       );
+      setUploadedSuccessfully(true);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -99,9 +105,10 @@ const AddDoc = ({ dirs }) => {
               </label>
               <button
                 onClick={handleUpload}
+                disabled={uploadedSuccessfully}
                 className="bg-red-600 p-3 w-32 text-center rounded text-white"
               >
-                Upload
+                {uploadedSuccessfully ? "Uploaded" : "Upload"}
               </button>
             </div>
           </div>

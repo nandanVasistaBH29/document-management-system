@@ -1,3 +1,12 @@
+/* 
+1. `/api/documents/doc-upload.ts` <br />
+   ``clarity``: < br/>
+      1.written in TypeScript and uses formidable package to manage uploads of diffenent types of files <br />
+      2. the uploaded documents can be found @ `/public/storage/${org_name}/${user_email}` <br />
+      3. maxFileSize = 16000 * 1024 * 1024;//bits <br />
+      4. need not worry about the filename clashing because `Date.now()` will be appened to file name to prevent this from happening <br />
+    ip : organizationName, email
+    op : failname */
 // src code for how to handle file uploads on the fileSystem locally in NEXT.js https://gist.github.com/ndpniraj/2735c3af00a7c4cbe50602ffe6209fc3
 import { NextApiHandler, NextApiRequest } from "next";
 import formidable from "formidable"; //a package which makes uploading files inside next.js a cake walk
@@ -30,14 +39,14 @@ const readFile = (
       return filename;
     };
   }
-  options.maxFileSize = 16000 * 1024 * 1024;
+  options.maxFileSize = 16000 * 1024 * 1024; //bits
   const form = formidable(options);
   return new Promise((resolve, reject) => {
     form.parse(req, (err, fields, files) => {
       if (err) reject(err);
       resolve({ fields, files });
       console.log(filePath);
-      encryptFile(filePath); // call for encryption
+      // encryptFile(filePath); // call for encryption // commented
     });
   });
 };

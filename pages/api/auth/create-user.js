@@ -1,3 +1,15 @@
+/*
+/api/auth/create-user.js
+   req: bcryptjs(for hashing the password) and dbconnection
+   method:POST
+   ip:email,password,oid,isAdmin ; oid=>is the foriegn key stands for organization_id primary key of organization table
+   op: success: status(200).json("user has been created");
+   cause of failure:
+   1.DB pool not able to provide a connection
+   2.ORG not found Violation of foreign key constraint
+   3.user already exist : email must be unique for an user
+*/
+
 import { pool } from "../../../utils/connectDb";
 import bcrypt from "bcryptjs";
 export default function handler(req, res) {

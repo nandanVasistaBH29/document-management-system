@@ -1,3 +1,15 @@
+/*
+3. /api/auth/login-user.js
+   req: bcryptjs(for comparing the password entered with the hashed password which is stored in DB) and dbconnection
+   method:POST
+   ip:email,password,organizationName;
+   op: success user details
+   cause of failure:
+   1.DB pool not able to provide a connection
+   2.Organization hasn't registed yet
+   3.user doesn't exist already exist
+   4.password could be wrongly entered by the user
+*/
 import { pool } from "../../../utils/connectDb";
 import bcrypt from "bcryptjs"; // to verify password
 export default function handler(req, res) {

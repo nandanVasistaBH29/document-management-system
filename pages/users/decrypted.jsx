@@ -17,6 +17,7 @@ const Decrypted = () => {
       );
       console.log(res);
       if (res.data.err) return;
+      console.log(res.data);
       setFiles(res.data);
       console.log(res);
     } catch (err) {
@@ -40,7 +41,12 @@ const Decrypted = () => {
               return (
                 <>
                   <h4>{file}</h4>
-                  <a href={file} download="download.pdf">
+                  <a
+                    href={
+                      `/storage/${user.organizationName}/${user.email}/` + file
+                    }
+                    download="download.pdf"
+                  >
                     Download
                   </a>
                 </>

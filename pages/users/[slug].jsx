@@ -61,12 +61,20 @@ const User = () => {
             return (
               <>
                 <h4>{file}</h4>
-                <Link
-                  href={"/users/decrypted"}
-                  onClick={() => handleDecypt(file)}
+                {/* <button
+                // href={"/users/decrypted"} encrypted needed add  it
+                // onClick={() => handleDecypt(file)}
                 >
-                  Decrypt The File First
-                </Link>
+                  Download
+                </button> */}
+                <a
+                  href={
+                    `/storage/${user.organizationName}/${user.email}/` + file
+                  }
+                  download="download.pdf"
+                >
+                  Download
+                </a>
               </>
             );
           })}

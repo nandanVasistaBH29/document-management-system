@@ -1,4 +1,15 @@
 // src code for how to handle file uploads on the fileSystem locally in NEXT.js https://gist.github.com/ndpniraj/2735c3af00a7c4cbe50602ffe6209fc3
+/*
+/api/logo-upload.ts
+clarity: < br/> 1.written in TypeScript and uses formidable package to manage uploads of logos
+2. the uploaded documents can be found @ /public/logo/
+3. maxFileSize = 4000 * 1024 * 1024;//bits
+4. need not worry about the filename clashing because Date.now() will be appened to file name to prevent this from happening
+ip : organizationName
+op : failname
+
+
+*/
 import { NextApiHandler, NextApiRequest } from "next";
 import formidable from "formidable"; //a package which makes uploading files inside next.js a cake walk
 import path from "path";

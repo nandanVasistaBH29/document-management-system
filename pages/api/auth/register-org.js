@@ -1,6 +1,14 @@
-// /api/auth/register-org"
-// /api/register
-// POST
+/*
+4. /api/auth.register-org.js
+   req:bcryptjs(for hashing the password) and dbconnection
+   method:POST
+   ip:organizationName,email,password,phone
+   clarity:the logo upload is handled by diff api call
+   op: .status(200).json("org has been created");
+   cause of failure:
+   1.DB pool not able to provide a connection
+   2.ORG already exist or org name must be unique
+*/
 import { pool } from "../../../utils/connectDb";
 import bcrypt from "bcryptjs";
 export default function handler(req, res) {

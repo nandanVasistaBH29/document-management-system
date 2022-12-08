@@ -140,10 +140,8 @@ Change pem permission using chmod <br />
 ```
 chmod 400 key.pem
 ```
-<br />
-Copy the pem file into project root. SSH into server.
-<br />
-```bash
+Copy the pem file into project root. SSH into server. <br />
+```
 ssh -i key.pem ubuntu@[IP_ADDRESS]
 ```
 <br />
@@ -162,15 +160,14 @@ Go to the IP address in browser using http protocol and verify Nginx welcome pag
 ## Configure Nginx.
 
 <br/>
-```
+```bash
 sudo vim /etc/nginx/conf.d/my-document.conf
 ```
 Insert the following configuration. <br />
-```javascript
+```
 server {  
  listen 80;  
  server_name IP_ADDRESS;
-
     location / {
         proxy_pass http://127.0.0.1:3000/;
     }
@@ -244,4 +241,26 @@ pm2 deploy production setup
 Run deployment. <br />
 ```bash
 pm2 deploy production
+```
+
+# How To Install MySQL on Ubuntu 20.04
+```bash
+sudo apt update
+sudo apt install mysql-server
+sudo systemctl start mysql.service
+```
+<br />
+## Step 2 — Configuring MySQL
+```bash
+sudo mysql
+```
+```
+ALTER USER root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+```
+mysql -u root -p
+```
+### security script with `sudo`
+```
+sudo mysql_secure_installation
 ```

@@ -132,7 +132,7 @@ module.exports = {
 Check in the file.
 
 <br />
-```bash
+```
 git add .
 git commit -m "add ecosystem"
 ```
@@ -143,13 +143,13 @@ Push to GitHub.
 On local machine:
 <br/>
 Change pem permission using chmod
-```bash
+```
 chmod 400 key.pem
 ```
 <br />
 Copy the pem file into project root. SSH into server.
 <br />
-```bash
+```
 ssh -i key.pem ubuntu@[IP_ADDRESS]
 ```
 On the server: Install Node, PM2, and Nginx. <br />

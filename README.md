@@ -129,21 +129,15 @@ module.exports = {
 };
 ```
 
-Check in the file.
-
-<br />
 ```bash
 git add .
 git commit -m "add ecosystem"
 ```
-Push to GitHub.
-
-<br />
+Push to GitHub. <br />
 ## Provision server <br />
-On local machine:
-<br/>
+On local machine: <br/>
 Change pem permission using chmod <br />
-```bash
+```
 chmod 400 key.pem
 ```
 <br />
@@ -168,11 +162,11 @@ Go to the IP address in browser using http protocol and verify Nginx welcome pag
 ## Configure Nginx.
 
 <br/>
-```bash
+```
 sudo vim /etc/nginx/conf.d/my-document.conf
 ```
 Insert the following configuration. <br />
-```bash
+```javascript
 server {  
  listen 80;  
  server_name IP_ADDRESS;

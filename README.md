@@ -143,13 +143,13 @@ Push to GitHub.
 On local machine:
 <br/>
 Change pem permission using chmod
-```
+```bash
 chmod 400 key.pem
 ```
 <br />
 Copy the pem file into project root. SSH into server.
 <br />
-```
+```bash
 ssh -i key.pem ubuntu@[IP_ADDRESS]
 ```
 On the server: Install Node, PM2, and Nginx. <br />
@@ -181,8 +181,7 @@ server {
     }
 
 }
-
-````
+```
 Restart Nginx.
 <br />
 
@@ -195,17 +194,15 @@ sudo service nginx restart
 Option 1: SSH Agent Forwarding <br/>
 On local machine: <br />
 Edit ssh config. <br/>
-```
+```bash
 vim ~/.ssh/config
 ```
 Insert the following.
 <br/>
 ```
-
 Host [IP_ADDRESS]
 ForwardAgent yes
-
-````
+```
 Run ssh-add. <br />
 ```bash
 ssh-add
@@ -253,6 +250,3 @@ Run deployment. <br />
 ```bash
 pm2 deploy production
 ```
-
-
-````

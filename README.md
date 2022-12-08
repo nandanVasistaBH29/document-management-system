@@ -132,17 +132,17 @@ module.exports = {
 Check in the file.
 
 <br />
-```
+```bash
 git add .
 git commit -m "add ecosystem"
 ```
 Push to GitHub.
 
 <br />
-## Provision server
+## Provision server <br />
 On local machine:
 <br/>
-Change pem permission using chmod
+Change pem permission using chmod <br />
 ```bash
 chmod 400 key.pem
 ```
@@ -152,6 +152,7 @@ Copy the pem file into project root. SSH into server.
 ```bash
 ssh -i key.pem ubuntu@[IP_ADDRESS]
 ```
+<br />
 On the server: Install Node, PM2, and Nginx. <br />
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -199,7 +200,7 @@ vim ~/.ssh/config
 ```
 Insert the following.
 <br/>
-```
+```bash
 Host [IP_ADDRESS]
 ForwardAgent yes
 ```
